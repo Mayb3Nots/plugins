@@ -206,10 +206,13 @@ final class GoogleMapController
   private static float toFloat(Object o) {
     return ((Number) o).floatValue();
   }
+  private static Map<?, ?> toMap(Object o) {
+    return (Map<?, ?>) o;
+  }
 
   @Override
   public void onMapReady(GoogleMap googleMap) {
-    final Object data = creationParams.get("options");
+    final Map<?, ?> data = toMap(creationParams);
     final Object padding = data.get("padding");
     if (padding != null) {
       final List<?> paddingData = toList(padding);
