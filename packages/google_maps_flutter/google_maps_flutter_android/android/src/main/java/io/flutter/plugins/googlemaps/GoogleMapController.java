@@ -187,9 +187,24 @@ final class GoogleMapController
               }
             });
   }
-
+  private static List<?> toList(Object o) {
+    return (List<?>) o;
+  }
+  private static float toFloat(Object o) {
+    return ((Number) o).floatValue();
+  }
   @Override
   public void onMapReady(GoogleMap googleMap) {
+    final Object data = creationParams.get("options");
+    final Object padding = data.get("padding");
+    if (padding != null) {
+      final List<?> paddingData = toList(padding);
+      googleMap.setPadding(
+              (int)  (toFloat(paddingData.get(0)) * density),
+              (int)  (toFloat(paddingData.get(1)) * density),
+              (int)  (toFloat(paddingData.get(2)) * density),
+              (int)  (toFloat(paddingData.get(3)) * density),);
+    }
     Convert.interpretGoogleMapOptions(creationParams.get("options"), this);
     this.googleMap = googleMap;
     this.googleMap.setIndoorEnabled(this.indoorEnabled);
