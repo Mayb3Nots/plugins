@@ -84,16 +84,18 @@ final class GoogleMapController
   private List<Object> initialPolylines;
   private List<Object> initialCircles;
   private List<Map<String, ?>> initialTileOverlays;
-
+  private  Map<String, Object> creationParams;
   GoogleMapController(
       int id,
       Context context,
       BinaryMessenger binaryMessenger,
       LifecycleProvider lifecycleProvider,
+      Map<String, Object> creationParams,
       GoogleMapOptions options) {
     this.id = id;
     this.context = context;
     this.options = options;
+    this.creationParams = creationParams;
     this.mapView = new MapView(context, options);
     this.density = context.getResources().getDisplayMetrics().density;
     methodChannel =
@@ -188,6 +190,7 @@ final class GoogleMapController
 
   @Override
   public void onMapReady(GoogleMap googleMap) {
+    Convert.interpretGoogleMapOptions(creationParams.get("options"), this);
     this.googleMap = googleMap;
     this.googleMap.setIndoorEnabled(this.indoorEnabled);
     this.googleMap.setTrafficEnabled(this.trafficEnabled);
