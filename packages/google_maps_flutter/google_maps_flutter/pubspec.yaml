@@ -24,9 +24,9 @@ dependencies:
     sdk: flutter
   # Temporary path dependencies to allow moving Android and iOS implementations.
   google_maps_flutter_android:
-    path: ../google_maps_flutter_android
+    path: google_maps_flutter_android
   google_maps_flutter_ios:
-    path: ../google_maps_flutter_ios
+    path: google_maps_flutter_ios
   google_maps_flutter_platform_interface: ^2.2.1
 
 dev_dependencies:
